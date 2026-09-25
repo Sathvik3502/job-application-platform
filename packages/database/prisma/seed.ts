@@ -1,0 +1,3 @@
+import {PrismaClient} from "@prisma/client";
+const prisma=new PrismaClient();
+async function main(){const user=await prisma.user.upsert({where:{email:"avery@example.test"},update:{},create:{email:"avery@example.test",passwordHash:"DEMO_ONLY_NOT_A_REAL_PASSWORD"}});await prisma.candidateProfile.upsert({where:{userId:user.id},update:{},create:{userId:user.id,fullName:"Avery Patel",location:"India",skills:["TypeScript","React","PostgreSQL","Playwright"],titles:["TypeScript Engineer"],yearsExperience:6,workAuthorized:true}});console.log("Fake demo user and profile seeded.");}main().finally(()=>prisma.$disconnect());

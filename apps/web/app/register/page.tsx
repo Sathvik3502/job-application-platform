@@ -1,0 +1,1 @@
+export default function Register(){return <><h1>Create account</h1><article className="card"><p className="muted">Account registration requires the configured database. Passwords must be hashed with Argon2 before persistence.</p><button disabled>Create account</button></article></>}

@@ -1,0 +1,1 @@
+export default function Login(){return <><h1>Sign in</h1><article className="card"><p className="muted">Authentication wiring is the next persistence phase. Demo mode is available without an account.</p><button disabled>Sign in</button></article></>}

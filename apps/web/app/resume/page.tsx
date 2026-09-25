@@ -1,0 +1,1 @@
+export default function Resume(){return <><h1>Master resume</h1><article className="card"><h2>Upload pipeline</h2><p className="muted">PDF, DOCX and TXT are validated, stored outside public assets, extracted, and presented for approval. This interface is queued for durable upload repository wiring.</p><button disabled>Upload resume (requires database setup)</button></article></>}

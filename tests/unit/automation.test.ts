@@ -1,0 +1,2 @@
+import {describe,it,expect} from "vitest";import {classifyField,submissionGate} from "../../packages/automation/src/index";
+describe("automation safety",()=>{it("classifies deterministic fields",()=>expect(classifyField("Work authorization")).toBe("WORK_AUTHORIZATION"));it("does not allow dry run submission",()=>expect(submissionGate({match:99,eligible:true,alreadyApplied:false,supported:true,answersResolved:true,confidence:100,captcha:false,login:false}).allowed).toBe(false))});

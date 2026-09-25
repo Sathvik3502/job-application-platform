@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server";export function GET(){return NextResponse.json({worker_id:"local-demo-worker",last_seen:new Date().toISOString(),current_job:null,queue_size:0,browser_status:"idle",ollama_status:"unverified",database_status:"demo"});}

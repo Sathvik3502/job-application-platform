@@ -1,0 +1,3 @@
+import {fingerprint,Job} from "@job-platform/shared";
+export const demoJob:Job={id:"job_01",company:"Northstar Labs",title:"Senior TypeScript Engineer",location:"Remote — India",remote:true,salary:2400000,source:"Mock ATS",applicationUrl:"/test-ats",postedAt:"Today",requirements:["TypeScript","React","5+ years experience","PostgreSQL"],description:"Build secure workflow software with TypeScript, React, PostgreSQL and Playwright.",jobHash:""};demoJob.jobHash=fingerprint(demoJob);
+export const demoProfile={fullName:"Avery Patel",email:"avery@example.test",phone:"+91 90000 00000",location:"India",skills:["TypeScript","React","PostgreSQL","Playwright"],titles:["Software Engineer","TypeScript Engineer"],yearsExperience:6,workAuthorized:true,minSalary:1800000};

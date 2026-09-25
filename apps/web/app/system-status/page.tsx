@@ -1,0 +1,1 @@
+export default function SystemStatus(){return <><h1>System status</h1><article className="card"><p>Worker: <span className="warn">Local worker not verified</span></p><p>Database: Demo mode</p><p>Ollama: Optional / not verified</p><p>Browser: Idle</p></article></>}

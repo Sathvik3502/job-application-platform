@@ -1,0 +1,1 @@
+export default function Settings(){return <><h1>Settings</h1><article className="card"><h2>Privacy and account</h2><p className="muted">Credentials, browser session files, and sensitive answers are never shown in this dashboard.</p><button>Manage account</button></article></>}

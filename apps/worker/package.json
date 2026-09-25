@@ -1,0 +1,1 @@
+{"name":"@job-platform/worker","private":true,"scripts":{"start":"tsx src/index.ts"},"dependencies":{"@job-platform/automation":"*","@job-platform/matching":"*","@job-platform/shared":"*","dotenv":"^16.4.7"}}

@@ -1,0 +1,1 @@
+{"name":"@job-platform/automation","version":"0.1.0","main":"src/index.ts","types":"src/index.ts","dependencies":{"@job-platform/shared":"*","playwright":"^1.49.1"}}

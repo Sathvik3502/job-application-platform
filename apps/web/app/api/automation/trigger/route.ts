@@ -1,0 +1,1 @@
+import {NextRequest,NextResponse} from "next/server";export function POST(req:NextRequest){const token=req.headers.get("authorization")?.replace("Bearer ","");if(!process.env.CRON_SECRET||token!==process.env.CRON_SECRET)return NextResponse.json({error:"Unauthorized"},{status:401});return NextResponse.json({runId:crypto.randomUUID(),status:"QUEUED"},{status:202});}
