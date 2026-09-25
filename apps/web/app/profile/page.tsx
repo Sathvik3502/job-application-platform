@@ -1,1 +1,2 @@
-import {demoProfile} from "@/lib/demo";export default function Profile(){return <><h1>Candidate profile</h1><article className="card"><h2>{demoProfile.fullName}</h2><p className="muted">{demoProfile.email} · {demoProfile.location} · {demoProfile.yearsExperience} years experience</p><h2>Verified skills</h2><p>{demoProfile.skills.join(" · ")}</p><h2>Safety-sensitive answers</h2><p>Work authorization: {demoProfile.workAuthorized?"Verified eligible":"Not provided"}</p><button>Edit profile</button></article></>}
+import { ProfileEditor } from "@/components/profile-editor";
+export default function Profile(){return <><h1>Candidate profile</h1><p className="muted">Your automation only uses the information you explicitly verify here.</p><ProfileEditor /></>}

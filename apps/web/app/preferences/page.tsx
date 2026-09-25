@@ -1,1 +1,2 @@
-export default function Preferences(){return <><h1>Job preferences</h1><article className="card"><p>Target roles: TypeScript Engineer, Full-stack Engineer</p><p>Locations: India · Remote</p><p>Minimum salary: ₹18,00,000</p><p>Employment type: Full time</p><button>Edit preferences</button></article></>}
+import { PreferencesEditor } from "@/components/preferences-editor";
+export default function Preferences(){return <><h1>Job preferences</h1><p className="muted">These limits are enforced independently from the match score.</p><PreferencesEditor /></>}

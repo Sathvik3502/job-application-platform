@@ -35,6 +35,8 @@ Ollama is configured with `OLLAMA_BASE_URL` and `OLLAMA_MODEL`; it is optional f
 
 Push this folder to GitHub, import it in Vercel, and set `DATABASE_URL`, `CRON_SECRET`, and public-safe configuration. Deploy `apps/web` as the root directory (or configure the workspace command). Keep the Playwright/Ollama worker on a persistent local or VM process; Vercel should call only `/api/automation/trigger` and render the dashboard. The trigger requires `Authorization: Bearer $CRON_SECRET`.
 
-## Limitations
+## Production readiness and boundaries
 
-This starter uses demo data and an in-memory presentation layer pending database repository wiring. Authentication, durable queue claiming, real permitted job-source connectors, resume extraction, and real adapter-specific form automation remain follow-on phases. No UI control represents a real auto-apply action today.
+The application now has PostgreSQL-backed authentication, profile, preferences, answer-library, job-list, and application-list API routes. Run the migration and supply `DATABASE_URL` and `AUTH_SECRET` before using account features. The browser worker remains intentionally separate from Vercel.
+
+Do not enable automatic submission until a permitted, site-specific adapter has been reviewed. This repository does not bypass CAPTCHA, login prompts, robots restrictions, anti-bot systems, or ambiguous factual questions. Those conditions route work to manual review.
