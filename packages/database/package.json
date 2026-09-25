@@ -1,1 +1,1 @@
-{"name":"@job-platform/database","private":true,"dependencies":{"@prisma/client":"^6.1.0","bcryptjs":"^3.0.3"},"devDependencies":{"prisma":"^6.1.0"}}
+{"name":"@job-platform/database","private":true,"dependencies":{"@prisma/client":"^6.1.0","bcryptjs":"^2.4.3"},"devDependencies":{"prisma":"^6.1.0"}}

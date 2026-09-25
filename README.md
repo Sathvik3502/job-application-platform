@@ -1,6 +1,6 @@
 # ApplyPilot
 
-ApplyPilot is a local-first, safety-gated job discovery and application platform. This repository ships the first end-to-end target: a candidate profile is matched to mock jobs, eligibility is evaluated, application preparation is modeled, and a worker stops at `READY_TO_SUBMIT` by default. It never bypasses CAPTCHAs, authentication, anti-bot controls, or ambiguous factual questions.
+ApplyPilot is a local-first, safety-gated job discovery and application platform. This repository now contains the controlled-beta foundation: authenticated users have private profiles, preferences, answers, jobs, applications, durable transitions, and database-backed automation queueing. The worker stops before external submission by default and never bypasses CAPTCHAs, authentication, anti-bot controls, or ambiguous factual questions.
 
 ## Architecture
 
@@ -14,6 +14,7 @@ Prerequisites: Node.js 20+, Docker Desktop, and optionally Ollama. Copy `.env.ex
 docker compose up -d
 npm install
 npm run db:migrate
+npm run db:seed
 npm run dev
 npm run worker
 ```
@@ -35,8 +36,8 @@ Ollama is configured with `OLLAMA_BASE_URL` and `OLLAMA_MODEL`; it is optional f
 
 Push this folder to GitHub, import it in Vercel, and set `DATABASE_URL`, `CRON_SECRET`, and public-safe configuration. Deploy `apps/web` as the root directory (or configure the workspace command). Keep the Playwright/Ollama worker on a persistent local or VM process; Vercel should call only `/api/automation/trigger` and render the dashboard. The trigger requires `Authorization: Bearer $CRON_SECRET`.
 
-## Production readiness and boundaries
+## Current beta boundary
 
-The application now has PostgreSQL-backed authentication, profile, preferences, answer-library, job-list, and application-list API routes. Run the migration and supply `DATABASE_URL` and `AUTH_SECRET` before using account features. The browser worker remains intentionally separate from Vercel.
+The web application and worker now use PostgreSQL for account data and application queue state. The seed creates `avery@example.test` with password `DemoPassword123!` for local testing only. Change or remove this account before sharing a deployment.
 
-Do not enable automatic submission until a permitted, site-specific adapter has been reviewed. This repository does not bypass CAPTCHA, login prompts, robots restrictions, anti-bot systems, or ambiguous factual questions. Those conditions route work to manual review.
+External job-source connectors, secure resume extraction/storage, scheduled hosting, and adapter-specific ATS browser automation are not implemented yet. The queue can prepare and gate applications, but it cannot submit a real application. Keep `DRY_RUN=true`, `AUTOMATION_ENABLED=false`, and `AUTO_APPLY_ENABLED=false` until permitted sources, adapters, credentials, rate limits, and browser integration tests are added.

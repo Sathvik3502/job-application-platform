@@ -1,1 +1,1 @@
-{"name":"@job-platform/worker","private":true,"scripts":{"start":"tsx src/index.ts"},"dependencies":{"@job-platform/automation":"*","@job-platform/matching":"*","@job-platform/shared":"*","dotenv":"^16.4.7"}}
+{"name":"@job-platform/worker","private":true,"scripts":{"start":"tsx src/index.ts"},"dependencies":{"@job-platform/automation":"*","@job-platform/matching":"*","@job-platform/shared":"*","@prisma/client":"^6.1.0","dotenv":"^16.4.7"}}
