@@ -4,5 +4,6 @@ dist
 .env
 .env.local
 uploads
+.local-private-resumes
 playwright-report
 test-results

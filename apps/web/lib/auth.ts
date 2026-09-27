@@ -5,6 +5,7 @@ const cookieName = "applypilot_session";
 
 function secret() {
   const value = process.env.AUTH_SECRET || "development-only-change-me";
+  if (process.env.NODE_ENV === "production" && value.length < 32) throw new Error("AUTH_SECRET must contain at least 32 characters in production.");
   return new TextEncoder().encode(value);
 }
 

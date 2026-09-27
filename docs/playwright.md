@@ -1,3 +1,3 @@
 # Playwright
 
-Start with `/test-ats`; it covers required identity fields, file inputs, experience, compensation, work authorization and a final mock confirmation. CAPTCHA or anti-bot detection must stop and create manual review—never circumvent it.
+No ATS browser adapter is currently enabled. Implement an adapter only for a permitted source, test it against an owned or explicitly authorized environment, and stop for manual review on CAPTCHA, anti-bot challenges, authentication requirements, or ambiguous questions. Never bypass those controls.

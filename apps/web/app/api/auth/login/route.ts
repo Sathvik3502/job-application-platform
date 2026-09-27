@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
     return response;
   } catch (error) {
     console.error("Login database error", error);
-    return NextResponse.json({ error: "The database is unavailable. Start PostgreSQL, run the migration, and try again." }, { status: 503 });
+    const message = process.env.DATABASE_URL ? "The database could not be reached. Check the Neon connection, network access, and migration status." : "DATABASE_URL is not configured. Add it to the repository-root .env file and restart the development server.";
+    return NextResponse.json({ error: message }, { status: 503 });
   }
 }

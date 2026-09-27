@@ -1,6 +1,6 @@
 # ApplyPilot
 
-ApplyPilot is a local-first, safety-gated job discovery and application platform. This repository now contains the controlled-beta foundation: authenticated users have private profiles, preferences, answers, jobs, applications, durable transitions, and database-backed automation queueing. The worker stops before external submission by default and never bypasses CAPTCHAs, authentication, anti-bot controls, or ambiguous factual questions.
+ApplyPilot is a private job-search workspace with accounts, candidate profiles, preferences, saved answers, job matching, private resume upload/analysis, and an application review list. It imports attributed listings from Arbeitnow on a daily Vercel Cron schedule. It does not submit external applications.
 
 ## Architecture
 
@@ -8,18 +8,15 @@ ApplyPilot is a local-first, safety-gated job discovery and application platform
 
 ## Local development
 
-Prerequisites: Node.js 20+, Docker Desktop, and optionally Ollama. Copy `.env.example` to `.env`, then run:
+Prerequisites: Node.js 20+ and PostgreSQL. Set `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, and `CRON_SECRET` in the repository-root `.env`, then run:
 
 ```sh
-docker compose up -d
 npm install
 npm run db:migrate
-npm run db:seed
 npm run dev
-npm run worker
 ```
 
-Open `http://localhost:3000/dashboard` and use `/test-ats` to exercise the multi-page fake ATS. `MOCK_MODE=true` and `DRY_RUN=true` are safe defaults. The worker will never submit while dry run is enabled. To run checks:
+Open `http://localhost:3000/register` to create an account. To run checks:
 
 ```sh
 npm run test
@@ -30,14 +27,14 @@ npm run build
 
 ## AI and storage
 
-Ollama is configured with `OLLAMA_BASE_URL` and `OLLAMA_MODEL`; it is optional for this deterministic MVP. The next integration point is an `AIProvider` implementation in `packages/ai`, keeping a local Ollama provider replaceable. PostgreSQL and Redis are supplied by Docker Compose. Production object storage and real ATS adapters are intentionally not enabled in the demo flow.
+Resume parsing and private storage are implemented. Vercel deployments require a connected private Blob store; local development stores files under an ignored directory. AI enrichment and ATS submission adapters are not configured. PostgreSQL is required for accounts and application records. Redis is not currently used by the web workflow.
 
 ## Deployment
 
-Push this folder to GitHub, import it in Vercel, and set `DATABASE_URL`, `CRON_SECRET`, and public-safe configuration. Deploy `apps/web` as the root directory (or configure the workspace command). Keep the Playwright/Ollama worker on a persistent local or VM process; Vercel should call only `/api/automation/trigger` and render the dashboard. The trigger requires `Authorization: Bearer $CRON_SECRET`.
+Push this folder to GitHub, import it in Vercel, set the repository root as the project root, and configure `DATABASE_URL` and a strong `AUTH_SECRET`. The separate worker is not a continuously running production service yet; the automation trigger only queues eligible review records and does not submit external applications.
 
 ## Current beta boundary
 
-The web application and worker now use PostgreSQL for account data and application queue state. The seed creates `avery@example.test` with password `DemoPassword123!` for local testing only. Change or remove this account before sharing a deployment.
+The web application uses PostgreSQL for account data, imported jobs, resumes' extracted text, and application review state. Original resume files stay in private Vercel Blob storage in production; local development uses the ignored `.local-private-resumes/` folder. No demo account or seeded test job is included.
 
-External job-source connectors, secure resume extraction/storage, scheduled hosting, and adapter-specific ATS browser automation are not implemented yet. The queue can prepare and gate applications, but it cannot submit a real application. Keep `DRY_RUN=true`, `AUTOMATION_ENABLED=false`, and `AUTO_APPLY_ENABLED=false` until permitted sources, adapters, credentials, rate limits, and browser integration tests are added.
+The current public source is Arbeitnow and is fetched once daily; it is not a comprehensive global job-market feed. Remotive's public API is intentionally not used because its terms prohibit republishing listings on account/signup-gated sites. Job discovery and resume extraction are implemented, but no employer ATS submission adapter or continuously running application worker exists. Keep `AUTO_APPLY_ENABLED=false`; do not claim the site applies while users are away.

@@ -10,6 +10,7 @@ export async function PUT(request: NextRequest) {
   if ("error" in auth) return auth.error;
   const body = schema.safeParse(await request.json());
   if (!body.success || (body.data.autoApplyEnabled && !body.data.automationEnabled)) return NextResponse.json({ error: "Preferences are invalid or auto-apply is enabled without automation." }, { status: 400 });
+  if (body.data.autoApplyEnabled) return NextResponse.json({ error: "Automatic submission is unavailable until supported job sources and ATS adapters are configured." }, { status: 409 });
   const preferences = await prisma.userPreferences.upsert({ where: { userId: auth.user.id }, update: body.data, create: { ...body.data, userId: auth.user.id } });
   return NextResponse.json(preferences);
 }
